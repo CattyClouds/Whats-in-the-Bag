@@ -21,7 +21,7 @@ namespace What_s_in_the_Bag
 
 			// Debug outputs
 			string theCount = string.Join(",", TileAmounts.ToArray());
-			Console.WriteLine($"Total amount of each tile in bag: {theCount}");
+			Console.WriteLine($"Amount of each tile: {theCount}");
 			Console.WriteLine($"Total tiles in bag: {TileCount()}");
 
 			// End of program
@@ -49,16 +49,13 @@ namespace What_s_in_the_Bag
 
 			TileAmounts = tileAmounts; // Set property
 
-			// Debug: Adding all tiles to bag once
-			for (int i = 0; i < tiles.Length; i++)
+			for (int i = 0; i < tiles.Length; i++) // Go through every tile
 			{
-				bag.Add(tiles[i]);
+				for (int x = 0; x < tileAmounts[i]; x++) // Add the amount of tiles for each tile
+				{
+					bag.Add(tiles[i]);
+				}
 			}
-
-			//foreach (var tile in tiles)
-			//{
-			//	bag.Add(tile);
-			//}
 
 			string bagItems = string.Join(",", bag.ToArray());
 			Console.WriteLine(bagItems);
@@ -73,6 +70,13 @@ namespace What_s_in_the_Bag
 				count += TileAmounts[i];
 			}
 			return count; // Should be 100 by default
+		}
+
+		static int TileCountInBag()
+		{
+			int count = 0;
+
+			return count;
 		}
 	}
 }
