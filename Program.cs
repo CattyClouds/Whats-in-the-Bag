@@ -14,13 +14,12 @@ namespace What_s_in_the_Bag
 		static void Main(string[] args)
 		{
 			string dash = String.Concat(Enumerable.Repeat("-", 32));
-			Console.WriteLine($"What's in the bag?{Environment.NewLine}{dash}");
+			//Console.WriteLine($"What's in the bag?{Environment.NewLine}{dash}");
+			Console.WriteLine($"DEBUG Input count:{Environment.NewLine}{dash}");
+			Input("AEERTYOXMCNB_S"); // Sample input
+			//Input(Console.ReadLine());
 
-			//Console.Write("Tiles out of the bag: ");
-			Input("AEERTYOXMCNB_S"); // Sample input - 1a, 2e, 1r, 1t, 1y, 1o, 1x, 1m, 1n, 1c, 1b, 1_, 1s
-									 //Input(Console.ReadLine());
-
-			Console.WriteLine($"{Environment.NewLine}{Environment.NewLine}{dash}DEBUG{dash}{Environment.NewLine}");
+			Console.WriteLine($"{Environment.NewLine}{Environment.NewLine}{dash}{dash}{dash}");
 
 			// Debug outputs
 			string theCount = string.Join(",", TileAmounts.ToArray());
@@ -29,14 +28,13 @@ namespace What_s_in_the_Bag
 			Console.WriteLine($"Tiles in bag: {BagOutput(BagItems)}");
 
 			// End of program
-			Console.Write($"{dash}{Environment.NewLine}Press any key to exit...");
+			Console.Write($"{dash}{dash}{dash}{Environment.NewLine}Press any key to exit...");
 			Console.ReadKey();
 		}
 
 		static List<string> Input(string tilesOutOfBag)
 		{
 			List<string> bag = new List<string>(); // Bag is empty
-
 			string tiles = "ABCDEFGHIJKLMNOPQRSTUVWXYZ_";
 
 			int[] tileAmounts = {
@@ -59,24 +57,34 @@ namespace What_s_in_the_Bag
 				}
 			}
 
-			//
-			// TEST
-			//
+			//Counting the input chars and displaying them
 			int count = 0;
+			bool repeat = false;
+			string outOfBagItem = null;
+
 			foreach (var item in tilesOutOfBag)
 			{
-				
-				string repeatChar = item.ToString();
+				outOfBagItem = item.ToString();
+
+				count = 0;
+
 				for (int i = 0; i < tilesOutOfBag.Count(); i++)
 				{
-					if (repeatChar == tilesOutOfBag[i].ToString())
+					if (outOfBagItem == tilesOutOfBag[i].ToString())
 					{
 						count++;
-						Console.WriteLine($"REPEATED: {repeatChar} {count}");
 					}
 				}
+				if (count == 1)
+				{
+					Console.WriteLine($"CHAR: {outOfBagItem} {count}");
+				}
+				else if (count >= 2 & !repeat)
+				{
+					Console.WriteLine($"CHAR: {outOfBagItem} {count}");
+					repeat = true;
+				}
 			}
-			
 
 			// Set properties
 			TileAmounts = tileAmounts; 
@@ -85,7 +93,6 @@ namespace What_s_in_the_Bag
 			return bag;
 		}
 
-		// Debug
 		static int TotalTileCount()
 		{
 			int count = 0;
@@ -96,7 +103,6 @@ namespace What_s_in_the_Bag
 			return count; // Should be 100 by default
 		}
 
-		// To an array
 		static string BagOutput(List<string> bagInput)
 		{
 			//char[] theOutput = bagInput.ToArray();
