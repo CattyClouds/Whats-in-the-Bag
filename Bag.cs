@@ -10,14 +10,11 @@ namespace What_s_in_the_Bag
 	{
 		// Properties
 		public static int[] TileAmounts { get; set; }
-		public static List<string> TileBag { get; set; }
 		public static string Tiles { get; set; }
-		
+		public static List<string> TileBag { get; set; }
+
 		static Bag()
 		{
-			List<string> bag = new List<string>(); // Bag is empty
-			TileBag = bag;
-
 			string tiles = "ABCDEFGHIJKLMNOPQRSTUVWXYZ_";
 			Tiles = tiles;
 
@@ -33,16 +30,15 @@ namespace What_s_in_the_Bag
 				2,1,2   // Y,Z,_
 				};
 			TileAmounts = tileAmounts;
+
+			List<string> bag = new List<string>(); // Bag is empty
+			TileBag = bag;
+			AddTilesToBag();
 		}
 
-		static string Input2(string tileInput)
+		static void AddTilesToBag()
 		{
-			return tileInput;
-		}
-
-		static void AddTile()
-		{
-			for (int i = 0; i < Tiles.Length; i++) // Go through every tile
+			for (int i = 0; i < Tiles.Length; i++) // Go through every tile according to the rules of the game
 			{
 				for (int x = 0; x < TileAmounts[i]; x++) // Add the amount of tiles for each tile according to TileAmounts
 				{
@@ -51,16 +47,30 @@ namespace What_s_in_the_Bag
 			}
 		}
 
-		static void RemoveTile()
+		// Add tiles back into the bag
+		static void AddTile(string tile)
 		{
-			//TileBag.Remove("");
+			foreach(var item in tile)
+			{
+				TileBag.Add(item.ToString());
+				//TODO: Increment TileAmounts with the added tile
+			}
 		}
 
-		// TODO: Currently not displaying contents.
+		static void RemoveTile(string tile) // TODO: Make it work with more than 1 char
+		{
+			foreach (var item in tile)
+			{
+				if(TileBag.Contains(tile))
+				{
+					TileBag.Remove(tile);
+				}
+			}
+		}
+
 		public static string DisplayContents()
 		{
-			List<string> bagInput = TileBag;
-			string concatInput = string.Join(",", bagInput.ToArray()); ;
+			string concatInput = string.Join("", TileBag);
 			return concatInput;
 		}
 
@@ -76,7 +86,6 @@ namespace What_s_in_the_Bag
 
 		public static List<string> Input(string tilesOutOfBag)
 		{
-			//Counting the input chars and displaying them
 			int count = 0;
 			bool repeat = false;
 			string outOfBagItem = null;
