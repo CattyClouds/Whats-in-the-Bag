@@ -47,21 +47,25 @@ namespace What_s_in_the_Bag
 			}
 		}
 
-		// Add tiles back into the bag
-		static void AddTile(string tile)
-		{
-			foreach(var item in tile)
-			{
-				TileBag.Add(item.ToString());
-				//TODO: Increment TileAmounts with the added tile
-			}
-		}
+		//// Add tiles back into the bag. Probably won't implement.
+		//static void AddTile(string tile)
+		//{
+		//	foreach(var item in tile)
+		//	{
+		//		TileBag.Add(item.ToString());
+		//		//TODO: Increment TileAmounts with the added tile
+		//	}
+		//}
 
-		static void RemoveTile(string tile) // TODO: Make it work with more than 1 char
+		// TODO: Make it work with more than 1 char
+		// 1-count tile input
+		// 2-remove in tilebag
+		// 3-subtract from array/list
+		public static void RemoveTile(string tile)
 		{
 			foreach (var item in tile)
 			{
-				if(TileBag.Contains(tile))
+				if (TileBag.Contains(tile))
 				{
 					TileBag.Remove(tile);
 				}
@@ -74,33 +78,53 @@ namespace What_s_in_the_Bag
 			return concatInput;
 		}
 
-		public static int TotalTileCount()
+		// TODO: Make stringbuilder and set it to a property.
+		public static int CountBagContents()
 		{
+			List<int> countBagTileAmounts = new List<int>();
 			int count = 0;
-			for (int i = 0; i < TileAmounts.Length; i++)
+			for (int i = 0; i < TileBag.Count; i++) // Go through entire bag
 			{
-				count += TileAmounts[i];
+				if (i == 0 || TileBag[i - 1] == TileBag[i]) // Checking previous tile equals current one in index
+				{
+					count++;
+					//countBagTileAmounts.Add(count);
+					if (i == (TileBag.Count - 1))
+					{
+						countBagTileAmounts.Add(count);
+						Console.WriteLine($"CHAR: {TileBag[i]} {count}");
+					}
+				}
+				else
+				{
+					countBagTileAmounts.Add(count);
+					Console.WriteLine($"CHAR: {TileBag[i - 1]} {count}");
+					count = 1;
+				}
 			}
-			return count; // Should be 100 by default
+			return -1; // Temporary debug return. Gonna use it properly later for output separation
 		}
 
+		// Debug: Shows amount of tiles in input
 		public static List<string> Input(string tilesOutOfBag)
 		{
 			int count = 0;
 			bool repeat = false;
 			string outOfBagItem = null;
+			int[] outOfBagTileAmounts = new int[tilesOutOfBag.Count()];
 
 			foreach (var item in tilesOutOfBag)
 			{
 				outOfBagItem = item.ToString();
-
 				count = 0;
 
 				for (int i = 0; i < tilesOutOfBag.Count(); i++)
 				{
 					if (outOfBagItem == tilesOutOfBag[i].ToString())
 					{
+						RemoveTile(outOfBagItem);
 						count++;
+						outOfBagTileAmounts[i] = count;
 					}
 				}
 				if (count == 1)
@@ -113,8 +137,20 @@ namespace What_s_in_the_Bag
 					repeat = true;
 				}
 			}
+			string strta = string.Join(",", outOfBagTileAmounts);
+			Console.WriteLine(strta);
 
 			return TileBag;
+		}
+
+		public static int TotalTileCount()
+		{
+			int count = 0;
+			for (int i = 0; i < TileAmounts.Length; i++)
+			{
+				count += TileAmounts[i];
+			}
+			return count; // Should be 100 by default
 		}
 	}
 }

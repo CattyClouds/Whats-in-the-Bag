@@ -15,10 +15,12 @@ namespace What_s_in_the_Bag
 			//Bag.Input(Console.ReadLine());
 
 			Console.WriteLine($"Debug Input:{Environment.NewLine}{dash}");
-			Bag.Input("AEERTYOXMCNB_S"); // Sample input
+			//Bag.Input("AEERTYOXMCNB_S"); // Sample input
+			//Bag.RemoveTile("AEERTYOXMCNB_S");
 
 			Console.WriteLine($"{Environment.NewLine}{Environment.NewLine}{dash}{dash}{dash}");
 
+			Bag.CountBagContents();
 			DebugOutput();
 
 			Console.Write($"{dash}{dash}{dash}{Environment.NewLine}Press any key to exit...");
@@ -27,6 +29,7 @@ namespace What_s_in_the_Bag
 
 		static void DebugOutput()
 		{
+			//Console.WriteLine($"Bag: {Bag.CountBagContents()}");
 			Console.WriteLine($"Amount of each tile: {string.Join(",", Bag.TileAmounts.ToArray())}");
 			Console.WriteLine($"Total tiles in bag: {Bag.TotalTileCount()}");
 			Console.WriteLine($"Tiles in bag: {Bag.DisplayContents()}");
