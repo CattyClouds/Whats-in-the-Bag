@@ -15,15 +15,15 @@ namespace What_s_in_the_Bag
 			//Console.WriteLine($"What's in the bag?{Environment.NewLine}{dash}");
 			//Bag.Input(Console.ReadLine());
 
-			Console.WriteLine($"Debug Input:{Environment.NewLine}{dash}");
-			//Bag.Input("AEERTYOXMCNB_S"); // Sample input
-			//Bag.RemoveTile("AEERTYOXMCNB_S");
+			Console.WriteLine($"Debug Input:AEERTYOXMCNB_S{Environment.NewLine}{dash}");
+			Bag.RemoveTiles("AEERTYOXMCNB_S");
+			//Bag.RemoveTiles("AEERTYOXMCNB_S");
 
 			Console.WriteLine($"{Environment.NewLine}{Environment.NewLine}{dash}{dash}{dash}");
 
-			//Bag.CountBagContents();
-			Bag.RemoveTile('F');
+			//Bag.RemoveTile('E', 11);
 			DebugOutput();
+			Bag.SortBag();
 
 			Console.Write($"{dash}{dash}{dash}{Environment.NewLine}Press any key to exit...");
 			Console.ReadKey();
@@ -31,14 +31,8 @@ namespace What_s_in_the_Bag
 
 		static void DebugOutput()
 		{
-			//Console.WriteLine($"Bag: {Bag.CountBagContents()}");
-			//Console.WriteLine($"Bag.TileAmounts: {string.Join(",", Bag.TileAmounts.ToArray())}");
-			//Console.WriteLine($"Bag.TotalTileCount(): {Bag.TotalTileCount()}");
 			Console.WriteLine($"Bag.DisplayContents():{Environment.NewLine}{Bag.DisplayContents(Bag.TileBag)}");
-
-			//var stringList = Bag.CountBagTileAmounts.Select(x => x.ToString()).ToList();
-			//Console.WriteLine($"Tiles amounts: {Bag.DisplayContents(stringList)}");
-			//Console.WriteLine($"Tiles amounts: {Bag.DisplayContents(Bag.CountBagTileAmounts)}");
+			Console.WriteLine($"Bag.TotalTileCount(): {Bag.CountTilesInBag()}");
 		}
 	}
 }

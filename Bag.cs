@@ -10,8 +10,8 @@ namespace What_s_in_the_Bag
 	{
 		// Properties
 		public static string Tiles { get; set; }
+		public static int TotalTileCount { get; set; }
 		public static Dictionary<char, int> TileBag { get; set; }
-		public static List<int> CountBagTileAmounts { get; set; }
 		public static int[] TileAmounts { get; set; }
 
 		static Bag()
@@ -34,32 +34,58 @@ namespace What_s_in_the_Bag
 				2,1,2   // Y,Z,_
 				};
 			TileAmounts = tileAmounts;
+
 			AddTilesToBag();
 		}
 
 		static void AddTilesToBag()
 		{
-			foreach (var tile in Tiles)
+			for (int i = 0; i < Tiles.Length; i++)
 			{
-				TileBag.Add(tile, 9);
+				TileBag.Add(Tiles[i], TileAmounts[i]);
 			}
 		}
 
-		public static void RemoveTile(char tile)
+		public static void RemoveTile(char tile, int amount)
 		{
-			if (TileBag.ContainsKey(tile))
+			int keyValue = 0;
+			TileBag.TryGetValue(tile, out  keyValue);
+
+			if (TileBag.ContainsKey(tile) && keyValue > amount)
+			{
+				TileBag[tile] = keyValue - amount;
+			}
+			else
 			{
 				TileBag.Remove(tile);
+				Console.WriteLine($"REMOVED: {tile}");
 			}
-			#region Old code
-			//foreach (var item in tile)
-			//{
-			//	if (TileBag.Contains(tile))
-			//	{
-			//		TileBag.Remove(tile);
-			//	}
-			//}
-			#endregion
+		}
+
+		public static void RemoveTiles(string tiles)
+		{
+			foreach (var item in tiles)
+			{
+				if (Bag.TileBag.ContainsKey(item))
+				{
+					TileBag[item] = TileBag[item] - 1;
+				}
+				else Console.WriteLine("Error: Tile not found in bag.");
+			}
+		}
+
+		public static void SortBag()
+		{
+			int prevItem = 0;
+			foreach (var item in TileBag)
+			{
+				prevItem = item.Value;
+				if (item.Value == prevItem)
+				{
+					Console.WriteLine($"{item.Value}: {item.Key}");
+					prevItem = 0;
+				}
+			}
 		}
 
 		public static string DisplayContents(Dictionary<char, int> input)
@@ -68,85 +94,10 @@ namespace What_s_in_the_Bag
 			return concatInput;
 		}
 
-		// TODO: Make stringbuilder and set it to a property.
-		public static int CountBagContents()
+		public static int CountTilesInBag()
 		{
 			int total = 0;
-			return total;
-			#region Old code
-			//List<int> countBagTileAmounts = new List<int>();
-
-			//int count = 0;
-			//for (int i = 0; i < TileBag.Count; i++) // Go through entire bag
-			//{
-			//	if (i == 0 || TileBag[i - 1] == TileBag[i]) // Checking previous tile equals current one in index
-			//	{
-			//		count++;
-			//		countBagTileAmounts.Add(count);
-			//		if (i == (TileBag.Count - 1))
-			//		{
-			//			countBagTileAmounts.Add(count);
-			//			Console.WriteLine($"CHAR: {TileBag[i]}: {count} - {countBagTileAmounts[i]}");
-			//		}
-			//	}
-			//	else
-			//	{
-			//		countBagTileAmounts.Add(count);
-			//		Console.WriteLine($"CHAR: {TileBag[i - 1]}: {count} - {countBagTileAmounts[i]}");
-			//		count = 1;
-			//	}
-			//}
-			//CountBagTileAmounts = countBagTileAmounts;
-			//return -1; // Temporary debug return. Gonna use it properly later for output separation
-			#endregion
-		}
-
-		// Debug: Shows amount of tiles in input
-		//public static List<string> Input(string tilesOutOfBag)
-		//{
-		//	int count = 0;
-		//	bool repeat = false;
-		//	string outOfBagItem = null;
-		//	int[] outOfBagTileAmounts = new int[tilesOutOfBag.Count()];
-
-		//	foreach (var item in tilesOutOfBag)
-		//	{
-		//		outOfBagItem = item.ToString();
-		//		count = 0;
-
-		//		for (int i = 0; i < tilesOutOfBag.Count(); i++)
-		//		{
-		//			if (outOfBagItem == tilesOutOfBag[i].ToString())
-		//			{
-		//				RemoveTile(outOfBagItem);
-		//				count++;
-		//				outOfBagTileAmounts[i] = count;
-		//			}
-		//		}
-		//		if (count == 1)
-		//		{
-		//			Console.WriteLine($"CHAR: {outOfBagItem} {count}");
-		//		}
-		//		else if (count >= 2 & !repeat)
-		//		{
-		//			Console.WriteLine($"CHAR: {outOfBagItem} {count}");
-		//			repeat = true;
-		//		}
-		//	}
-		//	string strta = string.Join(",", outOfBagTileAmounts);
-		//	Console.WriteLine(strta);
-
-		//	return TileBag;
-		//}
-
-		public static int TotalTileCount()
-		{
-			int total = 0;
-
-			foreach (var item in TileBag.Keys)
-			{
-				total += TileBag.Values.Count;
-			}
+			total = TileBag.Values.Sum();
 
 			return total;
 		}
