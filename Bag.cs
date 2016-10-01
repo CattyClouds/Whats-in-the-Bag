@@ -13,7 +13,6 @@ namespace What_s_in_the_Bag
 		public static string Tiles { get; set; }
 		public static int TotalTileCount { get; set; }
 		public static Dictionary<char, int> TileBag { get; set; }
-		//public static SortedDictionary<char, int> SortedTileBag { get; set; }
 		public static int[] TileAmounts { get; set; }
 
 		static Bag()
@@ -48,29 +47,17 @@ namespace What_s_in_the_Bag
 			}
 		}
 
-		public static void RemoveTile(char tile, int amount)
-		{
-			int keyValue = 0;
-			TileBag.TryGetValue(tile, out  keyValue);
-
-			if (TileBag.ContainsKey(tile) && keyValue > amount)
-			{
-				TileBag[tile] = keyValue - amount;
-			}
-			else
-			{
-				TileBag.Remove(tile);
-				Console.WriteLine($"REMOVED: {tile}");
-			}
-		}
-
 		public static void RemoveTiles(string tiles)
 		{
-			foreach (var item in tiles)
+			foreach (var item in tiles.ToUpper())
 			{
-				if (Bag.TileBag.ContainsKey(item))
+				if (TileBag.ContainsKey(item) && TileBag[item] >= 1)
 				{
 					TileBag[item] = TileBag[item] - 1;
+				}
+				else if (TileBag.ContainsKey(item) && TileBag[item] <= 0)
+				{
+					Console.WriteLine($"Invalid input. More {item}'s have been taken from the bag than possible."); // Challenge error output
 				}
 				else Console.WriteLine("Error: Tile not found in bag.");
 			}
@@ -84,17 +71,11 @@ namespace What_s_in_the_Bag
 
 			foreach (var item in sortedDict)
 			{
-				//Console.WriteLine($"{sb}");
-				//Console.WriteLine();
-				//sb.Append(item.Value.ToString() + ": ");
-				//if (prevItem > item.Value)
 				if (item.Value < prevItem)
 				{
-					//sb.Append(item.Value.ToString() + ": ");
 					sb.Append($"{item.Value.ToString()}: {item.Key}");
 					prevItem = item.Value;
-					Console.Write($"{Environment.NewLine}{sb}"); // needs a write because this make a new line if it starts on a multiple of # of tile
-					//sb.Clear();
+					Console.Write($"{Environment.NewLine}{sb}");
 				}
 				else if (item.Value == prevItem)
 				{
@@ -104,10 +85,9 @@ namespace What_s_in_the_Bag
 				}
 				else if (item.Value > prevItem)
 				{
-					Console.WriteLine(">Entered SortBag() elseif");
+					Console.WriteLine(">Entered SortBag() elseif"); // Placeholder
 				}
 				else Console.WriteLine($">Entered SortBag() else");
-				//Console.WriteLine($"{sb}");
 				sb.Clear();
 			}
 		}
