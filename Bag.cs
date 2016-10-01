@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Collections;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,6 +13,7 @@ namespace What_s_in_the_Bag
 		public static string Tiles { get; set; }
 		public static int TotalTileCount { get; set; }
 		public static Dictionary<char, int> TileBag { get; set; }
+		//public static SortedDictionary<char, int> SortedTileBag { get; set; }
 		public static int[] TileAmounts { get; set; }
 
 		static Bag()
@@ -76,21 +78,39 @@ namespace What_s_in_the_Bag
 
 		public static void SortBag()
 		{
-			int prevItem = 0;
-			foreach (var item in TileBag)
+			StringBuilder sb = new StringBuilder();
+			var sortedDict = new SortedDictionary<char, int>(TileBag).OrderByDescending(tile => tile.Value);
+			int prevItem = int.MaxValue;
+
+			foreach (var item in sortedDict)
 			{
-				prevItem = item.Value;
-				if (item.Value == prevItem)
+				sb.Append(item.Value.ToString());
+
+				if (item.Value <= prevItem)
 				{
-					Console.WriteLine($"{item.Value}: {item.Key}");
-					prevItem = 0;
+					sb.Append(item.Key + " ");
+					prevItem = item.Value;
 				}
+				else if (item.Value > prevItem)
+				{
+					Console.WriteLine("Entered SortBag() elseif");
+				}
+				Console.WriteLine($"{item.Value}: {sb}");
 			}
 		}
 
 		public static string DisplayContents(Dictionary<char, int> input)
 		{
 			string concatInput = string.Join("\n", input);
+			return concatInput;
+		}
+
+		public static string DisplaySortedContents(Dictionary<char, int> input)
+		{
+			StringBuilder sb = new StringBuilder();
+			var sortedDict = new SortedDictionary<char, int>(TileBag).OrderByDescending(kvp => kvp.Value);
+
+			string concatInput = string.Join("\n", sortedDict);
 			return concatInput;
 		}
 

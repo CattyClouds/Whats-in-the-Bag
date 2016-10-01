@@ -17,13 +17,12 @@ namespace What_s_in_the_Bag
 
 			Console.WriteLine($"Debug Input:AEERTYOXMCNB_S{Environment.NewLine}{dash}");
 			Bag.RemoveTiles("AEERTYOXMCNB_S");
-			//Bag.RemoveTiles("AEERTYOXMCNB_S");
 
 			Console.WriteLine($"{Environment.NewLine}{Environment.NewLine}{dash}{dash}{dash}");
 
-			//Bag.RemoveTile('E', 11);
-			DebugOutput();
 			Bag.SortBag();
+			DebugOutput();
+
 
 			Console.Write($"{dash}{dash}{dash}{Environment.NewLine}Press any key to exit...");
 			Console.ReadKey();
@@ -31,8 +30,9 @@ namespace What_s_in_the_Bag
 
 		static void DebugOutput()
 		{
-			Console.WriteLine($"Bag.DisplayContents():{Environment.NewLine}{Bag.DisplayContents(Bag.TileBag)}");
-			Console.WriteLine($"Bag.TotalTileCount(): {Bag.CountTilesInBag()}");
+			//Console.WriteLine($"Bag.DisplayContents():{Environment.NewLine}{Bag.DisplayContents(Bag.TileBag)}");
+			//Console.WriteLine($"Bag.DisplaySortedContents(Bag.TileBag):{Environment.NewLine}{Bag.DisplaySortedContents(Bag.TileBag)}");
+			Console.WriteLine($"Bag.CountTilesInBag(): {Bag.CountTilesInBag()}");
 		}
 	}
 }
