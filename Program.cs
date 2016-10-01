@@ -21,10 +21,10 @@ namespace What_s_in_the_Bag
 			Console.WriteLine($"{Environment.NewLine}{Environment.NewLine}{dash}{dash}{dash}");
 
 			Bag.SortBag();
-			DebugOutput();
+			//DebugOutput();
 
 
-			Console.Write($"{dash}{dash}{dash}{Environment.NewLine}Press any key to exit...");
+			Console.Write($"{Environment.NewLine}{dash}{dash}{dash}{Environment.NewLine}Press any key to exit...");
 			Console.ReadKey();
 		}
 

@@ -84,18 +84,31 @@ namespace What_s_in_the_Bag
 
 			foreach (var item in sortedDict)
 			{
-				sb.Append(item.Value.ToString());
-
-				if (item.Value <= prevItem)
+				//Console.WriteLine($"{sb}");
+				//Console.WriteLine();
+				//sb.Append(item.Value.ToString() + ": ");
+				//if (prevItem > item.Value)
+				if (item.Value < prevItem)
 				{
-					sb.Append(item.Key + " ");
+					//sb.Append(item.Value.ToString() + ": ");
+					sb.Append($"{item.Value.ToString()}: {item.Key}");
+					prevItem = item.Value;
+					Console.Write($"{Environment.NewLine}{sb}"); // needs a write because this make a new line if it starts on a multiple of # of tile
+					//sb.Clear();
+				}
+				else if (item.Value == prevItem)
+				{
+					sb.Append($", {item.Key}");
+					Console.Write($"{sb}");
 					prevItem = item.Value;
 				}
 				else if (item.Value > prevItem)
 				{
-					Console.WriteLine("Entered SortBag() elseif");
+					Console.WriteLine(">Entered SortBag() elseif");
 				}
-				Console.WriteLine($"{item.Value}: {sb}");
+				else Console.WriteLine($">Entered SortBag() else");
+				//Console.WriteLine($"{sb}");
+				sb.Clear();
 			}
 		}
 
