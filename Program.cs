@@ -12,18 +12,21 @@ namespace What_s_in_the_Bag
 		{
 			Console.WindowHeight = 42; // Debug purposes
 			string dash = String.Concat(Enumerable.Repeat("-", 32));
+
+			var bag = new Bag();
+
 			Console.Write($"What's in the bag? ");
-			//Bag.RemoveTiles(Console.ReadLine());
-			Console.WriteLine($"{Environment.NewLine}{dash}");
+			//bag.RemoveTiles(Console.ReadLine());
+			Console.WriteLine($"\n{dash}");
 
-			Bag.RemoveTiles("AEERTYOXMCNB_S");		// Standard input 1
-			//Bag.RemoveTiles("PQAREIOURSTHGWIOAE_");	// Challenge input 1
-			//Bag.RemoveTiles("LQTOONOEFFJZT");			// Challenge input 2
-			//Bag.RemoveTiles("AXHDRUIOR_XHJZUQEE");	// Challenge input 3
+			bag.RemoveTiles("AEERTYOXMCNB_S");		// Standard input 1
+			//bag.RemoveTiles("PQAREIOURSTHGWIOAE_");	// Challenge input 1
+			//bag.RemoveTiles("LQTOONOEFFJZT");			// Challenge input 2
+			//bag.RemoveTiles("AXHDRUIOR_XHJZUQEE");	// Challenge input 3
 
-			Bag.SortBag();
+			bag.SortBag();
 
-			Console.Write($"{Environment.NewLine}{dash}{dash}{dash}{Environment.NewLine}Press any key to exit...");
+			Console.Write($"\n{dash}{dash}{dash}\nPress any key to exit...");
 			Console.ReadKey();
 		}
 	}
