@@ -1,4 +1,4 @@
-# Whats-in-the-Bag
+# What's in the Bag?
 Reddit Daily Programmer challenge #272 Easy - What's in the Bag?
 
 Link to challenge source: https://www.reddit.com/r/dailyprogrammer/comments/4oylbo/20160620_challenge_272_easy_whats_in_the_bag/
