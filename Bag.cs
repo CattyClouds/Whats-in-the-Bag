@@ -5,39 +5,24 @@ using System.Collections;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace What_s_in_the_Bag
+namespace Whats_in_the_Bag
 {
-	class Bag
+	public class Bag
 	{
-		/// <summary>
-		/// TODO: Cleanup property remnants
-		/// </summary>
-
-		private Dictionary<char, int> tileBag = new Dictionary<char, int>();
-
-		public Bag()
+		private Dictionary<char, int> tileBag = new Dictionary<char, int>()
 		{
-			string tiles = "ABCDEFGHIJKLMNOPQRSTUVWXYZ_";
-			int[] tileAmounts = {
-				9,2,2,  // A,B,C,
-				4,12,2, // D,E,F,
-				3,2,9,  // G,H,I,
-				1,1,4,  // J,K,L,
-				2,6,8,  // M,N,O,
-				2,1,6,  // P,Q,R,
-				4,6,4,  // S,T,U,
-				2,2,1,  // V,W,X,
-				2,1,2   // Y,Z,_
-				};
+			['A'] = 9,['B'] = 2,['C'] = 2,
+			['D'] = 4,['E'] = 12,['F'] = 2,
+			['G'] = 3,['H'] = 2,['I'] = 9,
+			['J'] = 1,['K'] = 1,['L'] = 4,
+			['M'] = 2,['N'] = 6,['O'] = 8,
+			['P'] = 2,['Q'] = 1,['R'] = 6,
+			['S'] = 4,['T'] = 6,['U'] = 4,
+			['V'] = 2,['W'] = 2,['X'] = 1,
+			['Y'] = 2,['Z'] = 1,['_'] = 2
+		};
 
-			// Adding tiles to the bag
-			for (int i = 0; i < tiles.Length; i++)
-			{
-				tileBag.Add(tiles[i], tileAmounts[i]);
-			}
-		}
-
-		public void RemoveTiles(string tiles)
+		public string RemoveTiles(string tiles)
 		{
 			foreach (var item in tiles.ToUpper())
 			{
@@ -47,14 +32,16 @@ namespace What_s_in_the_Bag
 				}
 				else if (tileBag.ContainsKey(item) && tileBag[item] <= 0)
 				{
-					Console.WriteLine($"Invalid input. More {item}'s have been taken from the bag than possible."); // Challenge error output
+					return $"Invalid input. More {item}'s have been taken from the bag than possible."; // Challenge error output
 				}
-				else Console.WriteLine("Error: Tile not found in bag.");
+				else return "Error: Tile not found in the bag.";
 			}
+			return "Removed tiles from the bag.";
 		}
 
-		public void SortBag()
+		public string FormatContents()
 		{
+			StringBuilder sb = new StringBuilder();
 			var sortedDict = tileBag.OrderByDescending(tile => tile.Value);
 			int prevItem = int.MaxValue;
 
@@ -63,13 +50,14 @@ namespace What_s_in_the_Bag
 				if (item.Value < prevItem)
 				{
 					prevItem = item.Value;
-					Console.Write($"\n{item.Value}: {item.Key}");
+					sb.Append($"\n{item.Value}: {item.Key}");
 				}
 				else if (item.Value == prevItem)
 				{
-					Console.Write($", {item.Key}");
+					sb.Append($", {item.Key}");
 				}
 			}
+			return sb.ToString();
 		}
 	}
 }
