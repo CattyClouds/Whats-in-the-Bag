@@ -17,10 +17,10 @@ namespace Whats_in_the_Bag
 			//bag.RemoveTiles(Console.ReadLine()); // Enter your own input
 			Console.WriteLine($"\n{dash}");
 
-			Console.Write(bag.RemoveTiles("AEERTYOXMCNB_S"));		// Standard input 1
+			//Console.Write(bag.RemoveTiles("AEERTYOXMCNB_S"));		// Standard input 1
 			//Console.Write(bag.RemoveTiles("PQAREIOURSTHGWIOAE_"));	// Challenge input 1
 			//Console.Write(bag.RemoveTiles("LQTOONOEFFJZT"));			// Challenge input 2
-			//Console.Write(bag.RemoveTiles("AXHDRUIOR_XHJZUQEE"));	// Challenge input 3
+			Console.Write(bag.RemoveTiles("AXHDRUIOR_XHJZUQEE"));	// Challenge input 3
 
 			Console.Write(bag.FormatContents());
 
