@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Whats_in_the_Bag
 {
@@ -19,9 +16,9 @@ namespace Whats_in_the_Bag
 
 			try
 			{
-				bag.RemoveTiles("AEERTYOXMCNB_S");		// Standard input 1
+				bag.RemoveTiles("AEERTYOXMCNB_S");			// Standard input 1
 				//bag.RemoveTiles("PQAREIOURSTHGWIOAE_");	// Challenge input 1
-				//bag.RemoveTiles("LQTOONOEFFJZT");		// Challenge input 2
+				//bag.RemoveTiles("LQTOONOEFFJZT");			// Challenge input 2
 				//bag.RemoveTiles("AXHDRUIOR_XHJZUQEE");	// Challenge input 3
 				Console.Write(bag.FormatContents());
 			}

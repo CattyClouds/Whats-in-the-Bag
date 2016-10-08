@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Collections;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Whats_in_the_Bag
 {
@@ -33,7 +31,6 @@ namespace Whats_in_the_Bag
 				else if (tileBag.ContainsKey(item) && tileBag[item] <= 0)
 				{
 					throw new Exception($"Invalid input. More {item}'s have been taken from the bag than possible.");
-					//return $"Invalid input. More {item}'s have been taken from the bag than possible."; // Challenge error output
 				}
 				else return "Error: Tile not found in the bag.";
 			}
